@@ -130,12 +130,12 @@ T8
 - Skill: `vercel-react-native-skills`
 
 **Done when**:
-- [ ] Returns exactly 7 buckets ordered most-recent-first (today at index 0) for any `now`
-- [ ] Each bucket's totals correctly sum only entries whose `createdAt` falls within that bucket's local day boundaries
-- [ ] An entry with `createdAt` exactly at `23:59:59.999` is attributed to that day (inclusive upper bound), not the next day
-- [ ] A day with no matching entries returns a bucket with all-zero totals and an empty `entries` array
-- [ ] Gate check passes: `npm test`
-- [ ] Test count: 5 tests pass (7-bucket count + ordering; correct totals per bucket; boundary-instant attribution; empty-day zeroing; entries outside the 7-day window excluded) — no silent deletions
+- [x] Returns exactly 7 buckets ordered most-recent-first (today at index 0) for any `now`
+- [x] Each bucket's totals correctly sum only entries whose `createdAt` falls within that bucket's local day boundaries
+- [x] An entry with `createdAt` exactly at `23:59:59.999` is attributed to that day (inclusive upper bound), not the next day
+- [x] A day with no matching entries returns a bucket with all-zero totals and an empty `entries` array
+- [x] Gate check passes: `npm test`
+- [x] Test count: 5 tests pass (7-bucket count + ordering; correct totals per bucket; boundary-instant attribution; empty-day zeroing; entries outside the 7-day window excluded) — no silent deletions
 
 **Tests**: unit
 **Gate**: quick
