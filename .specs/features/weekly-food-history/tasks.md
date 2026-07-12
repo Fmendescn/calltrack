@@ -104,11 +104,11 @@ T8
 - Skill: `vercel-react-native-skills`
 
 **Done when**:
-- [ ] `FoodEntryItem` renders its delete button when `onDelete` is passed, and omits it entirely when `onDelete` is undefined
-- [ ] `DashboardScreen` still deletes today's entries correctly via the relocated component (existing Dashboard behavior unchanged)
-- [ ] No remaining import of `FoodEntryItem` from `@/features/food-log` anywhere in the codebase
-- [ ] Gate check passes: `npm test`
-- [ ] Test count: 2 tests pass (renders delete button when `onDelete` provided; omits it when absent) — no silent deletions
+- [x] `FoodEntryItem` renders its delete button when `onDelete` is passed, and omits it entirely when `onDelete` is undefined
+- [x] `DashboardScreen` still deletes today's entries correctly via the relocated component (existing Dashboard behavior unchanged)
+- [x] No remaining import of `FoodEntryItem` from `@/features/food-log` anywhere in the codebase
+- [x] Gate check passes: `npm test`
+- [x] Test count: 2 tests pass (renders delete button when `onDelete` provided; omits it when absent) — no silent deletions
 
 **Tests**: unit
 **Gate**: quick
