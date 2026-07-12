@@ -53,6 +53,16 @@ describe('buildDailyHistory', () => {
     expect(yesterday.entries).toHaveLength(1);
   });
 
+  it("orders a bucket's entries newest-first by createdAt", () => {
+    const olderEntry = entry(10, new Date(2026, 0, 15, 8, 0, 0, 0));
+    const newerEntry = entry(11, new Date(2026, 0, 15, 19, 30, 0, 0));
+
+    const result = buildDailyHistory([olderEntry, newerEntry], NOW);
+
+    const today = result[0];
+    expect(today.entries.map((e) => e.id)).toEqual([11, 10]);
+  });
+
   it('attributes an entry at exactly 23:59:59.999 to that day, not the next (inclusive upper bound)', () => {
     const boundaryEntry = entry(4, new Date(2026, 0, 10, 23, 59, 59, 999), { calories: 111 });
 

@@ -34,6 +34,8 @@ describe('DayHistoryCard', () => {
     render(<DayHistoryCard day={makeDay()} goals={goals} />);
 
     expect(screen.getByText('800 kcal')).toBeTruthy();
+    expect(screen.getByText('40%')).toBeTruthy();
+    expect(screen.getByText('1200 kcal restantes')).toBeTruthy();
     expect(screen.getByText('Proteína: 30.0g')).toBeTruthy();
     expect(screen.getByText('Carboidratos: 60.0g')).toBeTruthy();
     expect(screen.getByText('Gordura: 20.0g')).toBeTruthy();
@@ -61,6 +63,7 @@ describe('DayHistoryCard', () => {
 
     expect(screen.getByText('Food 1')).toBeTruthy();
     expect(screen.getByText('Food 2')).toBeTruthy();
+    expect(screen.queryByText('✕')).toBeNull();
 
     fireEvent.press(screen.getByTestId('day-history-header'));
 
