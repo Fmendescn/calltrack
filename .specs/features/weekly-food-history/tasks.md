@@ -205,13 +205,13 @@ T8
 - Skill: `vercel-react-native-skills`
 
 **Done when**:
-- [ ] Renders totals + goal-adherence indicator for a day with entries
-- [ ] Renders the "Nenhum alimento registrado" empty state for a day with zero entries
-- [ ] Tapping the card reveals the food entry list (no delete action visible); tapping again collapses it
-- [ ] A day whose calorie total exceeds the goal is visually distinguished from one that isn't
-- [ ] When `goals.calories` is 0, the percentage renders as 0% instead of crashing/`NaN`
-- [ ] Gate check passes: `npm test`
-- [ ] Test count: 5 tests pass (totals render; empty-day state; expand reveals items / collapse hides them; exceeded-goal visual distinction; zero-goal guard) — no silent deletions
+- [x] Renders totals + goal-adherence indicator for a day with entries
+- [x] Renders the "Nenhum alimento registrado" empty state for a day with zero entries
+- [x] Tapping the card reveals the food entry list (no delete action visible); tapping again collapses it
+- [x] A day whose calorie total exceeds the goal is visually distinguished from one that isn't
+- [x] When `goals.calories` is 0, the percentage renders as 0% instead of crashing/`NaN`
+- [x] Gate check passes: `npm test`
+- [x] Test count: 5 tests pass (totals render; empty-day state; expand reveals items / collapse hides them; exceeded-goal visual distinction; zero-goal guard) — no silent deletions
 
 **Tests**: unit
 **Gate**: quick
