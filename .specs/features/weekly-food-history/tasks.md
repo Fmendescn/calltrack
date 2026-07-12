@@ -258,10 +258,10 @@ T8
 - Skill: NONE
 
 **Done when**:
-- [ ] Histórico tab appears in the tab bar alongside Dashboard / Registrar / Metas
-- [ ] Tapping it renders `FoodHistoryScreen` with 7 day cards
-- [ ] `npx tsc --noEmit` passes with no type errors
-- [ ] Gate check passes: `npx tsc --noEmit && npm test` (full suite, no regressions)
+- [x] Histórico tab appears in the tab bar alongside Dashboard / Registrar / Metas
+- [x] Tapping it renders `FoodHistoryScreen` with 7 day cards
+- [x] `npx tsc --noEmit` passes with no type errors
+- [x] Gate check passes: `npx tsc --noEmit && npm test` (full suite, no regressions)
 
 **Tests**: none (routing/config layer, matrix marks this "none")
 **Gate**: build
