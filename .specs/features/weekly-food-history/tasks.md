@@ -233,10 +233,10 @@ T8
 - Skill: `vercel-react-native-skills`
 
 **Done when**:
-- [ ] Renders exactly 7 `DayHistoryCard`s given a mocked 7-entry `history` array from `useFoodHistory`
-- [ ] Cards render in the same order as the array returned by the hook (no re-sorting in the screen — ordering is `buildDailyHistory`'s responsibility, already tested in T3)
-- [ ] Gate check passes: `npm test`
-- [ ] Test count: 1 test passes (renders 7 cards in given order) — no silent deletions
+- [x] Renders exactly 7 `DayHistoryCard`s given a mocked 7-entry `history` array from `useFoodHistory`
+- [x] Cards render in the same order as the array returned by the hook (no re-sorting in the screen — ordering is `buildDailyHistory`'s responsibility, already tested in T3)
+- [x] Gate check passes: `npm test`
+- [x] Test count: 1 test passes (renders 7 cards in given order) — no silent deletions
 
 **Tests**: unit
 **Gate**: quick
