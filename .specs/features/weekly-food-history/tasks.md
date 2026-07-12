@@ -156,11 +156,11 @@ T8
 - Skill: NONE
 
 **Done when**:
-- [ ] `getWeekHistory` is exposed on the context value and importable via `@/database`
-- [ ] It queries `food_entries` once (not 7 separate queries) and delegates grouping to `buildDailyHistory`
-- [ ] `DailyTotals` and `DailyHistoryEntry` types are exported from `@/database`
-- [ ] `npx tsc --noEmit` passes with no type errors
-- [ ] Gate check passes: `npx tsc --noEmit && npm test` (existing T3 tests still pass, no regression)
+- [x] `getWeekHistory` is exposed on the context value and importable via `@/database`
+- [x] It queries `food_entries` once (not 7 separate queries) and delegates grouping to `buildDailyHistory`
+- [x] `DailyTotals` and `DailyHistoryEntry` types are exported from `@/database`
+- [x] `npx tsc --noEmit` passes with no type errors
+- [x] Gate check passes: `npx tsc --noEmit && npm test` (existing T3 tests still pass, no regression)
 
 **Tests**: none (DB wiring layer — matrix marks this "none"; the logic it delegates to is already covered by T3's unit tests)
 **Gate**: build
