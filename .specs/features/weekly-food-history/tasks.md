@@ -181,9 +181,9 @@ T8
 - Skill: `vercel-react-native-skills`
 
 **Done when**:
-- [ ] Calls `getWeekHistory` on initial mount and populates `history`
-- [ ] Re-fetches when the screen regains focus (via `useFocusEffect` from `expo-router`, not `@react-navigation/native` directly)
-- [ ] `npx tsc --noEmit` passes with no type errors
+- [x] Calls `getWeekHistory` on initial mount and populates `history`
+- [x] Re-fetches when the screen regains focus (via `useFocusEffect` from `expo-router`, not `@react-navigation/native` directly)
+- [x] `npx tsc --noEmit` passes with no type errors
 
 **Tests**: none (thin wrapper with no branching logic of its own — matches the untested convention of `useDailyMacros`/`useFoodLog`; its behavior is exercised indirectly by T7's `FoodHistoryScreen` test via mocking)
 **Gate**: build
