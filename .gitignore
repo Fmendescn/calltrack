@@ -39,3 +39,13 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# AI agent/skill tooling (local, reinstalável)
+.agents/
+.claude/
+.cursor/
+.windsurf/
+skills-lock.json
+
+# spec-driven-development working notes (convenção do projeto — ver .specs/STATE.md)
+.specs/
