@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Start dev server (requires Expo Go SDK 54 on device)
+# Start dev server (requires Expo Go SDK 57 on device)
 npm start
 
 # Build and run on device/emulator (requires Android Studio or Xcode)
@@ -15,7 +15,7 @@ npm run ios
 # Install new packages — always use --legacy-peer-deps due to peer dep conflicts in this project
 npm install <package> --legacy-peer-deps
 
-# Fix package versions to match Expo SDK 54
+# Fix package versions to match Expo SDK 57
 ./node_modules/.bin/expo install --fix
 ```
 
@@ -23,7 +23,7 @@ npm install <package> --legacy-peer-deps
 
 ## Architecture
 
-**Expo SDK 54** · React Native 0.81.5 · React 19.1.0 · expo-router v6 (file-based routing) · expo-sqlite v16 (local persistence, works in Expo Go)
+**Expo SDK 57** · React Native 0.86 · React 19.2 · expo-router v6 (file-based routing) · expo-sqlite v16 (local persistence, works in Expo Go)
 
 ### Path alias
 
