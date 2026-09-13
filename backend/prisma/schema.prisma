@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  name          String
+  oauthProvider String   @map("oauth_provider")
+  oauthId       String   @map("oauth_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  refreshTokens RefreshToken[]
+  foodEntries   FoodEntry[]
+  macroGoal     MacroGoal?
+
+  @@unique([oauthProvider, oauthId])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  tokenHash String    @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model FoodEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  name      String
+  calories  Decimal  @db.Decimal(8, 2)
+  protein   Decimal  @db.Decimal(8, 2)
+  carbs     Decimal  @db.Decimal(8, 2)
+  fat       Decimal  @db.Decimal(8, 2)
+  fiber     Decimal  @db.Decimal(8, 2)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("food_entries")
+}
+
+model MacroGoal {
+  id             String   @id @default(uuid())
+  userId         String   @unique @map("user_id")
+  dailyCalories  Decimal  @default(2000) @map("daily_calories") @db.Decimal(8, 2)
+  dailyProtein   Decimal  @default(150) @map("daily_protein") @db.Decimal(8, 2)
+  dailyCarbs     Decimal  @default(250) @map("daily_carbs") @db.Decimal(8, 2)
+  dailyFat       Decimal  @default(65) @map("daily_fat") @db.Decimal(8, 2)
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("macro_goals")
+}
