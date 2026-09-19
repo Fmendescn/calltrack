@@ -1,18 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { configureApp } from '../app.setup';
-import { HealthModule } from './health.module';
+import { App } from 'supertest/types';
+import { AppModule } from './../src/app.module';
+import { configureApp } from './../src/app.setup';
 
-describe('HealthController', () => {
-  let app: INestApplication;
+// Boots the real AppModule (not HealthModule in isolation) so these tests fail
+// if AppModule stops importing HealthModule or the global prefix is dropped.
+describe('AppModule wiring (e2e)', () => {
+  let app: INestApplication<App>;
 
   beforeAll(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [HealthModule],
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
     }).compile();
 
-    app = moduleRef.createNestApplication();
+    app = moduleFixture.createNestApplication();
     configureApp(app);
     await app.init();
   });
@@ -21,7 +24,7 @@ describe('HealthController', () => {
     await app.close();
   });
 
-  it('GET /api/v1/health returns 200 with a body indicating status ok', async () => {
+  it('GET /api/v1/health returns 200 with { status: "ok" }', async () => {
     const response = await request(app.getHttpServer()).get('/api/v1/health');
 
     expect(response.status).toBe(200);
