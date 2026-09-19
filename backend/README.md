@@ -45,10 +45,11 @@ Copy the example env file and fill in local values:
 cp .env.example .env
 ```
 
-`.env.example` documents all 7 variables the app reads at boot (`DATABASE_URL`,
+`.env.example` documents all 7 variables the backend will use (`DATABASE_URL`,
 `JWT_SECRET`, `GOOGLE_CLIENT_ID`, `APPLE_CLIENT_ID`, `APPLE_TEAM_ID`, `APPLE_KEY_ID`,
-`APPLE_PRIVATE_KEY`), each with an inline comment explaining its purpose. For local
-development, at minimum set:
+`APPLE_PRIVATE_KEY`), each with an inline comment explaining its purpose. Today only
+`DATABASE_URL` is read and validated at boot; the other six are placeholders until auth
+is implemented in a later phase. For local development, at minimum set:
 
 - `DATABASE_URL` — must match the Postgres container started below, e.g.
   `postgresql://caltrack:caltrack@localhost:5432/caltrack`
@@ -68,7 +69,9 @@ docker compose up -d
 This starts a `postgres:16-alpine` container using the credentials in `.env`
 (`POSTGRES_USER`/`POSTGRES_PASSWORD`/`POSTGRES_DB`, defaulting to `caltrack`/`caltrack`/
 `caltrack`) with a named volume for persistence. The port defaults to `5432` and is
-overridable via `POSTGRES_PORT` in `.env` without editing `docker-compose.yml`.
+overridable via `POSTGRES_PORT` in `.env` without editing `docker-compose.yml`. If you
+change it, also update the port in `DATABASE_URL` so the app and Prisma point at the
+same one.
 
 Stop it with:
 

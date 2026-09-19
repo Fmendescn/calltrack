@@ -51,16 +51,19 @@ npm run build
 
 ```
 src/
-├── main.ts                    # Bootstrap: creates the Nest app, sets the global
-│                               # `/api/v1` prefix, starts listening
+├── main.ts                    # Bootstrap: creates the Nest app, applies
+│                               # configureApp(), starts listening
+├── app.setup.ts                # configureApp(app) — sets the global `/api/v1` prefix.
+│                               # Shared by main.ts and the tests so they can't drift.
 ├── app.module.ts               # Root module — wires ConfigModule, PrismaModule,
 │                               # HealthModule, and every feature module together
 │
 ├── config/
 │   └── env.validation.ts       # Joi schema run by ConfigModule.forRoot({ validate })
-│                               # — throws synchronously at boot if DATABASE_URL is
-│                               # missing/malformed. Extend this schema, not ad-hoc
-│                               # process.env reads, when a new required var shows up.
+│                               # — fails bootstrap (NestFactory.create rejects) if
+│                               # DATABASE_URL is missing/malformed. Extend this schema,
+│                               # not ad-hoc process.env reads, when a new required var
+│                               # shows up.
 │
 ├── prisma/
 │   ├── prisma.module.ts        # @Global() — import once in AppModule, PrismaService
@@ -91,13 +94,14 @@ PrismaService)` without importing `PrismaModule` again — import it once in
 Config is loaded once via `ConfigModule.forRoot({ isGlobal: true, validate })` in
 `app.module.ts`, so `ConfigService` is also injectable anywhere without a per-module
 import. Prefer `ConfigService.get(...)` over raw `process.env` reads in application
-code — `process.env` is only read directly inside `config/env.validation.ts` itself
-and `main.ts`'s `PORT` fallback.
+code — `process.env` is only read directly in `main.ts`'s `PORT` fallback
+(`config/env.validation.ts` receives the loaded config as an argument).
 
 ### Routing / prefix
 
-The global `/api/v1` prefix is set once in `main.ts` via `app.setGlobalPrefix('api/v1')`
-— a static prefix, not Nest's URI-versioning system. Every controller's `@Controller(...)`
+The global `/api/v1` prefix is set once in `app.setup.ts`'s `configureApp()` via
+`app.setGlobalPrefix('api/v1')` (called from `main.ts`, and from any test that builds a
+Nest app) — a static prefix, not Nest's URI-versioning system. Every controller's `@Controller(...)`
 path is relative to that prefix (e.g. `@Controller('health')` → `GET /api/v1/health`).
 
 ## Prisma workflow
@@ -127,7 +131,8 @@ path is relative to that prefix (e.g. `@Controller('health')` → `GET /api/v1/h
   `health/health.controller.spec.ts`, `config/env.validation.spec.ts`).
 - Co-locate e2e/integration tests under `test/*.e2e-spec.ts`, run via
   `npm run test:e2e` — reserved for behavior that needs a real dependency (e.g. the
-  real local Postgres for `PrismaService`), not a substitute for unit tests.
+  real local Postgres for `PrismaService`) or that pins how the real `AppModule` is
+  wired (`app.e2e-spec.ts`, `config.e2e-spec.ts`), not a substitute for unit tests.
 - Env vars: document every one in `.env.example` with an inline comment, and add
   required ones to `config/env.validation.ts`'s Joi schema so a missing/malformed value
   fails fast at boot instead of surfacing later as a runtime error.
