@@ -123,7 +123,8 @@ npm run test:cov      # unit tests with coverage
 ## Lint & format
 
 ```bash
-npm run lint     # ESLint, auto-fixes what it can
+npm run lint       # ESLint, auto-fixes what it can
+npm run lint:check # ESLint, read-only — fails on any error (what CI runs)
 npm run format   # Prettier, writes in place
 ```
 

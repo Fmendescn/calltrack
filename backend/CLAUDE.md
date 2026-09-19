@@ -33,7 +33,8 @@ npm run test:e2e       # e2e/integration — requires local Postgres running
 npm run test:cov       # unit tests with coverage
 
 # Lint / format / build
-npm run lint
+npm run lint           # ESLint with --fix (rewrites files)
+npm run lint:check     # ESLint, read-only — what CI runs
 npm run format
 npm run build
 ```
